@@ -1,8 +1,9 @@
 jQuery(document).ready(function($){
 	var gallery = $('.cd-gallery'),
 		foldingPanel = $('.cd-folding-panel'),
-		mainContent = $('.cd-main'),
-        pageContent = $('.cd-fold-content');
+		mainContent = $('.cd-main');
+		pageContent = $('.cd-fold-content'); //---MODIF----
+
 	/* open folding content */
 	gallery.on('click', 'a', function(event){
 		event.preventDefault();
@@ -18,8 +19,7 @@ jQuery(document).ready(function($){
 		/* detect click on .cd-gallery::before when the .cd-folding-panel is open */
 		if($(event.target).is('.cd-gallery') && $('.fold-is-open').length > 0 ) toggleContent('', false);
 	})
-   
-   
+
 	function openItemInfo(url) {
 		var mq = viewportSize();
 		if( gallery.offset().top > $(window).scrollTop() && mq != 'mobile') {
@@ -45,6 +45,7 @@ jQuery(document).ready(function($){
 		if( bool ) {
 			/* load and show new content */
 			var foldingContent = foldingPanel.find('.cd-fold-content');
+
 			foldingContent.load(url+' .cd-fold-content > *', function(event){
 				setTimeout(function(){
 					$('body').addClass('overflow-hidden');
@@ -55,9 +56,8 @@ jQuery(document).ready(function($){
 			});
 		} else {
 			/* close the folding panel */
-            $('body').removeClass('overflow-hidden');
 			var mq = viewportSize();
-            pageContent.scrollTop(0);
+			pageContent.scrollTop(0); //---MODIF----
 			foldingPanel.removeClass('is-open');
 			mainContent.removeClass('fold-is-open');
 			
